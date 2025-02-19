@@ -55,7 +55,7 @@ public class MainController {
     	
     	MainServices service = new MainServices();
     	
-    	service.saveProduct(product);
+    	service.saveAddProduct(product);
         return "redirect:/home";
     }
     
@@ -77,7 +77,7 @@ public class MainController {
 
     	MainServices service = new MainServices();
     	
-    	service.saveProduct(product);
+    	service.saveEditProduct(product);
     	
         return "redirect:/home";
     }

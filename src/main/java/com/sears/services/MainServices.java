@@ -59,7 +59,7 @@ public class MainServices {
 		return products;
    }
 	
-	public void saveProduct(Product product) {
+	public void saveAddProduct(Product product) {
 		
 		
         // Establish a connection
@@ -71,6 +71,33 @@ public class MainServices {
 
          // Using executeUpdate for INSERT, UPDATE, or DELETE statements
             String insertSQL  = "INSERT INTO protype.product(name, description, price) VALUES ( '" + product.getName() + "', '" + product.getDescription() + "', '" + product.getPrice() +"');";
+            int rowsAffected = statement.executeUpdate(insertSQL);
+            
+            System.out.println("Rows affected: " + rowsAffected);
+            
+        } catch (SQLException e) {
+            System.err.println("Cannot connect to the database!");
+            e.printStackTrace();
+        }
+   }
+	
+	public void saveEditProduct(Product product) {
+		
+		
+        // Establish a connection
+        try (Connection connection = DriverManager.getConnection(url, username, password)) {
+            System.out.println("Database connected!");
+
+            // Create a statement object
+            Statement statement = connection.createStatement();
+
+         // Using executeUpdate for INSERT, UPDATE, or DELETE statements
+            String insertSQL  = "UPDATE protype.product SET name = '" + product.getName() 
+            											+ "', description = '" + product.getDescription() 
+            											+ "', price = '" + product.getPrice() 
+            											+"' WHERE id = " + product.getId();
+            
+            
             int rowsAffected = statement.executeUpdate(insertSQL);
             
             System.out.println("Rows affected: " + rowsAffected);
